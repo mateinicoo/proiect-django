@@ -521,3 +521,16 @@ Traceback (most recent call last):
                                     ^^^^^^^^^^^^
 AttributeError: module 'datetime' has no attribute 'now'
 ERROR "POST /aplicatie_exemplu/contact/ HTTP/1.1" 500 67224
+ERROR Internal Server Error: /aplicatie_exemplu/contact/
+Traceback (most recent call last):
+  File "/opt/anaconda3/lib/python3.12/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mateinicolau/Desktop/anul_2/semestrul_1/Django/proiect_django/aplicatie_exemplu/views.py", line 449, in contact_view
+    date_mesaj['data_ora_sosire'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                                    ^^^^^^^^^^^^
+AttributeError: module 'datetime' has no attribute 'now'
+ERROR "POST /aplicatie_exemplu/contact/ HTTP/1.1" 500 67226

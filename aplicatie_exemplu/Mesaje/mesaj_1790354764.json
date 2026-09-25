@@ -1,0 +1,15 @@
+{
+    "nume": "Nicolau",
+    "prenume": "Matei",
+    "cnp": "5051121226732",
+    "data_nasterii": "2005-11-21",
+    "email": "mateinicolau4@gmail.com",
+    "tip_mesaj": "reclamatie",
+    "subiect": "Cerere",
+    "zile_asteptare": 2,
+    "mesaj": "F d f f d f f d fd f d Matei Nicolau",
+    "varsta_text": "20 ani și 10 luni",
+    "urgent": false,
+    "ip_utilizator": "127.0.0.1",
+    "data_ora_sosire": "2026-09-25 16:46:04"
+}
