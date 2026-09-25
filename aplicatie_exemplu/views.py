@@ -11,7 +11,6 @@ from django.db.models import Count, Q
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 from datetime import datetime, date
-import datetime
 from django.contrib import messages
 from django.utils import timezone
 from .forms import CarteModelForm
