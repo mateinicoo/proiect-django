@@ -11,6 +11,34 @@ Site-ul pune la dispozitie carti si diverse obiecte vechi de arta la preturi acc
 * **Backend:** Python, Django
 * **Bază de date:** SQLite (dezvoltare) / PostgreSQL (producție)
 * **Frontend:** Django Templates, Bootstrap 5 / Tailwind CSS, HTML5, CSS3
+## ⚙️ Cum rulezi proiectul local
+1. **Clonează depozitul:**
+   \`\`\`bash
+   git clone https://github.com/mateinicoo/proiect-django.git
+   cd proiect-django
+   \`\`\`
+
+2. **Creează și activează mediul virtual:**
+   \`\`\`bash
+   python -m venv venv
+   source venv/bin/activate  # Pe Linux/macOS sau: venv\Scripts\activate pe Windows
+   \`\`\`
+
+3. **Instalează dependențele:**
+   \`\`\`bash
+   pip install -r requirements.txt
+   \`\`\`
+
+4. **Rulează migrațiile bazei de date:**
+   \`\`\`bash
+   python manage.py migrate
+   \`\`\`
+
+5. **Pornește serverul:**
+   \`\`\`bash
+   python manage.py runserver
+   \`\`\`
+   Aplicația va fi accesibilă la adresa `http://127.0.0.1:8000/`.
 ## 📸 Capturi de ecran / Demo
 <img width="1439" height="686" alt="Captură de ecran din 2026-09-25 la 19 54 57" src="https://github.com/user-attachments/assets/a9c84954-1d77-483b-bca9-f23a19c46b81" />
 
