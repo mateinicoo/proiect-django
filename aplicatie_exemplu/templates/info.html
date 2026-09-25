@@ -1,0 +1,14 @@
+{% extends 'baza.html' %}
+{% block titlu %}Pagina Info{% endblock %}
+
+{% block continut %}
+    <h2>Pagina Info</h2>
+    <p>Aceasta este pagina de informații.</p>
+
+    <h3>Parametri</h3>
+    <p>Număr parametri GET: {{ numar_parametri }}</p>
+    <p>Nume parametri: {{ nume_parametri }}</p>
+{% endblock %}
+{% block footer %}
+<p>IP utilizator: {{ ip_utilizator }}</p>
+{% endblock %}

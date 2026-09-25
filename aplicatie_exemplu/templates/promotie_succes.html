@@ -1,0 +1,13 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div class="container mt-5 text-center">
+    <div class="alert alert-success shadow">
+        <h1 class="display-4">✅ Promoție Trimisă!</h1>
+        <p class="lead">Datele au fost salvate în baza de date și emailurile personalizate au fost grupate și trimise prin <strong>send_mass_mail</strong>.</p>
+        <hr>
+        <a href="{% url 'index' %}" class="btn btn-outline-dark">Înapoi la prima pagină</a>
+        <a href="{% url 'promotii' %}" class="btn btn-primary">Creează altă ofertă</a>
+    </div>
+</div>
+{% endblock %}

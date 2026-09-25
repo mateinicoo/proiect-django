@@ -1,0 +1,26 @@
+{% extends 'baza.html' %}
+{% block body_class %}carte-detail-page{% endblock %}
+{% block titlu %}{{ carte.titlu }}{% endblock %}
+
+{% block continut %}
+<div class="detail-container">
+    
+    <div class="produs-thumb">
+        {% if carte.imagine %}
+            <img src="{{ carte.imagine.url }}" alt="{{ carte.titlu }}">
+        {% endif %}
+    </div>
+    <h1>{{ carte.titlu }}</h1>
+    <h2>{{ carte.id_autor.nume }} {{ carte.id_autor.prenume }}</h2>
+    <p>An publicatie: {{ carte.an_publicatie }}</p>
+    <p>Pret: {{ carte.pret }} RON</p>
+    <p>ISBN: {{ carte.ISBN }}</p>
+    <p>Editura: {{ carte.id_editura.nume_editura }}</p>
+
+
+
+
+    <a class="btn" href="{% url 'carti' %}">Înapoi la lista de cărți</a>
+
+</div>
+{% endblock %}

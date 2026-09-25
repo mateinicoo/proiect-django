@@ -1,0 +1,12 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div style="text-align: center; margin-top: 100px; padding: 40px; background: #f9f9f9; border-radius: 10px;">
+    <h2 style="color: #333;">Te-ai deconectat cu succes!</h2>
+    <p>Îți mulțumim că ne-ai vizitat biblioteca online.</p>
+    <div style="margin-top: 20px;">
+        <a href="{% url 'login' %}" style="padding: 10px 20px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px;">Loghează-te din nou</a>
+        <a href="{% url 'index' %}" style="padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 4px; margin-left: 10px;">Prima pagină</a>
+    </div>
+</div>
+{% endblock %}

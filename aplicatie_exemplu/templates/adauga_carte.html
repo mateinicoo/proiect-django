@@ -1,0 +1,46 @@
+{% extends 'baza.html' %}
+
+{% block continut %} <div class="form-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+    <h2>Adăugare Carte Nouă</h2>
+    
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+        {% if form.non_field_errors %}
+            <div style="color: white; background-color: #d9534f; padding: 10px; margin-bottom: 20px;">
+                {{ form.non_field_errors }}
+            </div>
+        {% endif %}
+
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: bold;">{{ field.label }}</label>
+                {{ field }}
+                
+                {% if field.help_text %}
+                    <small style="color: #666; display: block;">{{ field.help_text }}</small>
+                {% endif %}
+
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div style="color: #d9534f; font-size: 0.9em;">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer;">
+            Salvează Cartea
+        </button>
+    </form>
+</div>
+{% endblock %}

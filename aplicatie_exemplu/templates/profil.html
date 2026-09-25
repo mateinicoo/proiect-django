@@ -1,0 +1,15 @@
+{% extends 'baza.html' %}
+{% block continut %}
+    <h2>Profil Utilizator (Date din Sesiune)</h2>
+    <ul>
+        <li><strong>Utilizator:</strong> {{ user_info.username }}</li>
+        <li><strong>Email:</strong> {{ user_info.email }}</li>
+        <li><strong>Oraș:</strong> {{ user_info.oras }}</li>
+        <li><strong>Telefon:</strong> {{ user_info.telefon }}</li>
+        <li><strong>Bio:</strong> {{ user_info.bio }}</li>
+    </ul>
+
+    <hr>
+    <a href="{% url 'password_change' %}" class="btn btn-warning">Schimbă Parola</a>
+    <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+{% endblock %}

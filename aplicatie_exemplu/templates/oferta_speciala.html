@@ -1,0 +1,39 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div class="container mt-5">
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="jumbotron p-5 bg-dark text-white rounded shadow-lg text-center">
+        <h1 class="display-3">Felicitări, {{ user.username }}!</h1>
+        <p class="lead">Ai deblocat accesul la oferta noastră exclusivă de <strong>50% reducere</strong>.</p>
+        <hr class="my-4" style="background-color: white;">
+        
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-dark p-3">
+                    <h4>Cod Voucher</h4>
+                    <h2 class="text-danger">SECRET50</h2>
+                </div>
+            </div>
+            <div class="col-md-8 text-left">
+                <h3>Instrucțiuni:</h3>
+                <ul>
+                    <li>Folosește codul la checkout pentru orice carte din categoria Fictiune.</li>
+                    <li>Această permisiune este temporară și va expira la delogare.</li>
+                    <li>Nu împărtăși codul cu alți utilizatori!</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-5">
+            <a class="btn btn-outline-light btn-lg" href="{% url 'index' %}" role="button">Înapoi la cumpărături</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

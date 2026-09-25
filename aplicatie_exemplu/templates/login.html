@@ -1,0 +1,36 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div class="form-container" style="max-width: 400px; margin: 50px auto; padding: 30px; border: 1px solid #ccc; border-radius: 10px;">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if form.errors or form.non_field_errors %}
+        <div style="padding: 10px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 15px;">
+            Date de autentificare incorecte!
+        </div>
+    {% endif %}
+    <h3>Autentificare</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div style="margin-bottom: 10px;">
+            {{ form.username.label_tag }} <br> {{ form.username }}
+        </div>
+        <div style="margin-bottom: 10px;">
+            {{ form.password.label_tag }} <br> {{ form.password }}
+        </div>
+        
+        <div style="margin: 15px 0; display: flex; align-items: center;">
+            {{ form.remember_me }} 
+            <label for="{{ form.remember_me.id_for_label }}" style="margin-left: 10px;">{{ form.remember_me.label }}</label>
+        </div>
+
+        <button type="submit" style="width: 100%; background: #007bff; color: white; border: none; padding: 10px;">Login</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,224 @@
+{% extends 'baza.html' %}
+{% load static %}
+
+{% block body_class %}carti-page{% endblock %}
+{% block titlu %}
+    {% if categorie_curenta %}
+        Cărți din Categoria: {{ categorie_curenta.nume }}
+    {% else %}
+        Lista de Cărți
+    {% endif %}
+{% endblock %}
+
+{% block continut %}
+<div class="formular-filtrare" style="margin-bottom: 30px; padding: 20px; background-color: #836328ff; border-radius: 5px;">
+    <form method="GET" action=""> 
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;">
+            
+            <div style="flex: 1 1 200px;">
+                {% for error in filtrare_form.titlu.errors %}
+                    <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+                {% endfor %}
+                <label for="{{ filtrare_form.titlu.id_for_label }}">Titlu</label>
+                {{ filtrare_form.titlu }}
+            </div>
+            
+            <div style="flex: 1 1 200px;">
+                <label for="{{ filtrare_form.autor.id_for_label }}">Autor</label>
+                {{ filtrare_form.autor }}
+            </div>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;">
+                
+                <div style="flex: 1 1 200px;">
+                    <label for="{{ filtrare_form.categorie.id_for_label }}">Categorie</label>
+                    {{ filtrare_form.categorie }}
+                </div>
+                
+                {% if categorie_curenta %}
+                    <input type="hidden" name="categorie" value="{{ categorie_curenta.id }}">
+                {% endif %}
+
+            </div>
+            
+            <div style="flex: 1 1 100px;">
+                {% for error in filtrare_form.pret_min.errors %}
+                    <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+                {% endfor %}
+                <label for="{{ filtrare_form.pret_min.id_for_label }}">Preț Min</label>
+                {{ filtrare_form.pret_min }}
+            </div>
+            
+            <div style="flex: 1 1 100px;">
+                {% for error in filtrare_form.pret_max.errors %}
+                    <p style="color: red; font-size: 12px; margin-top: 5px;">{{ error }}</p>
+                {% endfor %}
+                <label for="{{ filtrare_form.pret_max.id_for_label }}">Preț Max</label>
+                {{ filtrare_form.pret_max }}
+            </div>
+
+            <div style="flex: 1 1 150px;">
+                <label for="{{ filtrare_form.elemente_per_pagina.id_for_label }}">Elemente/Pag.</label>
+                {{ filtrare_form.elemente_per_pagina }}
+            </div>
+            
+            <input type="hidden" name="sort" value="{{ sortare_curenta }}">
+
+            <button type="submit" style="padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px;">Aplică Filtre</button>
+            <a href="{% url 'carti' %}" 
+            onclick="return confirm('Ești sigur că vrei să resetezi filtrele? Vei pierde selecțiile actuale.');"
+            style="padding: 10px 15px; background-color: #777; color: white; border: none; border-radius: 4px; text-decoration: none;">
+            Resetare
+            </a>
+        </div>
+        
+    </form>
+</div>
+
+<div class="categorii-meniu" style="text-align:center; margin-bottom: 25px;">
+    <strong style="color:white; font-size: 20px; display: block; margin-bottom: 10px;">
+        Categorii
+    </strong>
+    <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:10px;">
+        <a href="{% url 'carti' %}" class="btn" style="background-color: #38b438;">
+            Toate Cărțile
+        </a>
+        
+        {% for cat in categorii_menu %}
+            <a href="{% url 'categorie_detail' slug_categorie=cat.slug %}" class="btn"
+               {% if categorie_curenta.slug == cat.slug %}style="background-color: #f7b400; font-weight: bold;"{% endif %}>
+                {{ cat.nume }}
+            </a>
+        {% empty %}
+            <span style="color:white;">Nicio categorie disponibilă.</span>
+        {% endfor %}
+    </div>
+</div>
+
+<h2 class="pagina-titlu" style="text-align:center; color:#fff; margin-top:20px;">
+    Filtrare & Căutare
+</h2>
+
+<h2 class="pagina-titlu" style="text-align:center; color:#fff; margin-top:20px;">
+    Rezultate
+</h2>
+
+<p class="pagina-descriere" style="text-align:center; color:white; font-size:18px;">
+    {% if nrcarti > 0 %}
+        Cărți găsite: {{ nrcarti }}
+    {% else %}
+        Nu au fost găsite cărți care să corespundă criteriilor de filtrare.
+    {% endif %}
+</p>
+
+<div class="optiuni-sortare" style="text-align:center; margin-bottom: 20px;">
+    <strong style="color:white; margin-right: 15px;">Sortează după Titlu:</strong>
+    
+    
+    {% if categorie_curenta %}
+        {% with base_url='categorie_detail' categorie_slug=categorie_curenta.slug %}
+            <a href="{% url base_url slug_categorie=categorie_slug %}?{{ query_params }}&sort=a" class="btn">
+                alfabetic
+            </a>
+            
+            <a href="{% url base_url slug_categorie=categorie_slug %}?{{ query_params }}&sort=d" class="btn">
+                invers alfabetic
+            </a>
+            
+            <a href="{% url base_url slug_categorie=categorie_slug %}" class="btn" style="background-color: #777;">
+                Resetare Filtre/Sortare
+            </a>
+        {% endwith %}
+    {% else %}
+        <a href="{% url 'carti' %}?{{ query_params }}&sort=a" class="btn">
+            alfabetic
+        </a>
+        
+        <a href="{% url 'carti' %}?{{ query_params }}&sort=d" class="btn">
+            invers alfabetic
+        </a>
+        
+        <a href="{% url 'carti' %}" class="btn" style="background-color: #777;">
+            Resetare
+        </a>
+    {% endif %}
+</div>
+
+{% if eroare %}
+    <p style="color:red; text-align:center; font-weight:bold;">{{ eroare }}</p>
+{% endif %}
+
+<div class="produse-grid" style="position:relative; padding:20px;">
+    {% for carte in pagina.object_list %}
+        <div class="produs-card">
+            
+            <div class="produs-thumb">
+                {% if carte.imagine %}
+                    <img src="{{ carte.imagine.url }}" alt="{{ carte.titlu }}">
+                {% else %}
+                    <img src="{% static 'img/no-image.png' %}" alt="Fără imagine">
+                {% endif %}
+            </div>
+
+            <h3 class="produs-titlu"><a href="{% url 'carte_detail' carte.ISBN %}">{{ carte.titlu }}</a></h3>
+
+            <h4 class="produs-autor">
+                {{ carte.afiseaza_autori }} 
+            </h4>
+
+            <p class="produs-desc">
+                An: {{ carte.an_publicatie|default:"N/A" }}
+            </p>
+
+            {% if carte.categorie %}
+            <p class="produs-categorie" style="margin-bottom: 10px;">
+                <a href="{% url 'categorie_detail' slug_categorie=carte.categorie.slug %}"
+                   style="background-color: {{ carte.categorie.culoare_hex }}; 
+                          color: white; 
+                          padding: 4px 8px; 
+                          border-radius: 4px; 
+                          text-decoration: none; 
+                          font-weight: bold; 
+                          display: inline-block;">
+                    {{ carte.categorie.nume }}
+                </a>
+            </p>
+        {% endif %}
+
+
+            <div class="produs-pret">
+                {{ carte.pret }} RON
+            </div>
+
+            <div class="produs-actiuni">
+                <a class="btn btn-primary" href="{% url 'cos_virtual' %}">
+                    Adaugă în coș
+                </a>
+            </div>
+
+        </div>
+    {% empty %}
+        <div class="no-items" style="color:white; text-align:center; width:100%; font-size:24px;">
+            Nu există cărți disponibile care să corespundă filtrelor.
+        </div>
+    {% endfor %}
+</div>
+
+<div style="text-align:center; margin:25px 0;">
+
+    
+    {% if pagina.has_previous %}
+        <a class="btn" href="?pagina={{ pagina.previous_page_number }}&{{ query_params }}">⟵ Anterior</a>
+    {% endif %}
+
+    <span style="font-size:18px; margin:0 15px; font-weight:bold; color:white;">
+        Pagina {{ pagina.number }} / {{ pagina.paginator.num_pages }}
+    </span>
+
+    {% if pagina.has_next %}
+        <a class="btn" href="?pagina={{ pagina.next_page_number }}&{{ query_params }}">Următor ⟶</a>
+    {% endif %}
+
+</div>
+{% endblock %}

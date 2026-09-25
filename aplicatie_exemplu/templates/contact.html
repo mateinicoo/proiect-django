@@ -1,0 +1,45 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div class="container" style="max-width: 600px; margin: 30px auto; color: white;">
+    <h1 style="text-align: center;">Contactați-ne</h1>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div style="background-color: #4CAF50; padding: 10px; border-radius: 5px; margin-bottom: 20px;">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" style="background: rgba(0,0,0,0.5); padding: 25px; border-radius: 10px;">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-weight: bold; margin-bottom: 5px;">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div style="color: #ff6b6b; font-size: 0.9em;">
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Trimite Mesajul</button>
+        </div>
+    </form>
+</div>
+
+<style>
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+    }
+</style>
+{% endblock %}

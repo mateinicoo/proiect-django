@@ -1,0 +1,5 @@
+Subiect: {{ subiect }}
+Salutare! Avem o oferta speciala pentru cartile de educatie.
+Promotia {{ nume }} iti aduce o reducere de {{ reducere }}%.
+Foloseste codul: {{ voucher }}
+Grabeste-te, expira la data de: {{ data_expirare }}

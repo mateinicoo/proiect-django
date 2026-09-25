@@ -1,0 +1,41 @@
+{% extends 'baza.html' %}
+{% load static %}
+
+{% block titlu %}Pagina Principală{% endblock %}
+
+{% block continut %}
+<h1>Bine ai venit!</h1>
+
+<img src="{% static 'imagini/banner.jpeg' %}" alt="Banner" width="600">
+
+<section id="sectiune1">
+    <h2>Descriere</h2>
+    <p>Site-ul pune la dispozitie carti si diverse obiecte vechi de arta la preturi accesibile. Produsele pot fi livrate la domiciliu sau achizitionate din magazine fizice. De asemenea cumparam carti de la cei care sunt dispusi sa puna la dispozitie propriile carti. Site-ul web ajuta oamenii sa isi aleaga cartile preferate in functie de categorii (ex. tema, autor, editura). Interfata ofera simplitate si este intuitiva pentru usurinta plasarii unei comenzi, vanzarea unui produs sau pentru simpla informare asupra unor carti. In cazul intampinarii unor probleme, exista sectiune special destinata intrebarilor intalnite frecvent (FAQ) si in cazul in care problema nu e lamurita, site-ul ofera informatii de contact organizatorilor.
+
+</p>
+</section>
+
+<section id="sectiune2">
+    <h2>Secțiunea 2</h2>
+    <p>Pe site la noi puteti cumpara carti la pret mai mic decat pretul din magazin. De asemenea aveti ocazia sa vindeti carti de care nu mai aveti nevoia dar care sunt inca in stare buna.</p>
+</section>
+
+<section id="sectiune3">
+    <h2>Secțiunea 3</h2>
+    <p>Avem de asemenea produse de colectie: antichitati, vaze, accesorii etc. Puteti achizitiona astfel de produs sau le puteti vinde daca nu mai aveti nevoie de ele. </p>
+</section>
+
+<section id="sectiune4">
+    <h2>Secțiunea 4</h2>
+    <p>Pentru recomandari sau intrebari ne puteti contacta pe pagina "Contact"   </p>
+</section>
+
+<section id="sectiune5">
+    <h2>Secțiunea 5</h2>
+    <p> </p>
+</section>
+{% endblock %}
+
+{% block footer %}
+<p>IP utilizator: {{ ip_utilizator }}</p>
+{% endblock %}

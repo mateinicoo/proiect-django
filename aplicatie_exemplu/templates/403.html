@@ -1,0 +1,38 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<div class="container mt-5 text-center">
+    <p class="lead">
+        {% if user.is_authenticated %}
+            Salut {{ user.username }}
+        {% else %}
+            Salut preastimate anonim
+        {% endif %}
+    </p>
+
+    <h1>
+        {% if titlu %}
+            {{ titlu }}
+        {% else %}
+            Eroare 403
+        {% endif %}
+    </h1>
+
+    <div class="alert alert-warning mt-4">
+        <p>Ne pare rău, dar nu este permis accesul la resursa curentă.</p>
+        <p><strong>Motiv:</strong> {{ mesaj_personalizat }}</p>
+    </div>
+
+    <div class="mt-4">
+        <p>Număr accesări pagini interzise în această sesiune: {{ nr_accesari }}</p>
+        
+        {% if nr_accesari > n_max %}
+            <p style="color: red; font-weight: bold; font-size: 1.2em;">
+                ATENȚIE: Ați depășit numărul maxim de încercări permise ({{ n_max }})!
+            </p>
+        {% endif %}
+    </div>
+
+    <a href="{% url 'index' %}" class="btn btn-primary mt-3">Înapoi la pagina principală</a>
+</div>
+{% endblock %}

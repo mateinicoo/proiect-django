@@ -1,0 +1,12 @@
+<html>
+<body>
+    <img src="https://nume-site.ro/static/logo.png" alt="Logo" style="width:150px;">
+    <h1>Bun venit, {{ user.first_name }} {{ user.last_name }}!</h1>
+    <p>Username-ul tău este: <strong>{{ user.username }}</strong></p>
+    <p>Te rugăm să îți confirmi adresa de email dând click pe butonul de mai jos:</p>
+    <a href="{{ link_confirmare }}" 
+       style="padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+       Confirmă Email-ul
+    </a>
+</body>
+</html>

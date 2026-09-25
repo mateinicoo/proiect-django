@@ -1,0 +1,125 @@
+{% load static %}
+{% load auth_extras %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titlu %}Site Exemplu{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/stil.css' %}">
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <header>
+        <div class="dropdown">
+        <button class="dropbtn">☰ Meniu</button> 
+        <div class="dropdown-content">
+            <div class="sub-dropdown">
+                        <a href="{% url 'index' %}" class="sub-btn">Acasă</a>
+                        <div class="sub-dropdown-content">
+                            <a href="{% url 'index' %}#sectiune1">Descriere</a>
+                            <a href="{% url 'index' %}#sectiune2">Secțiunea 2</a>
+                            <a href="{% url 'index' %}#sectiune3">Secțiunea 3</a>
+                        </div>
+            </div>  
+            <div class="sub-dropdown">
+                <a href="{% url 'despre' %}" class="sub-btn">Despre ▸</a>
+                <div class="sub-dropdown-content">
+                    <a href="{% url 'despre' %}#istoric">Istoric</a>
+                    <a href="{% url 'despre' %}#echipa">Echipa</a>
+                </div>
+            </div>
+            <a href="{% url 'carti' %}">Carti</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'profil' %}" style="color: #f7b400;">Profilul meu ({{ user.username }})</a>
+            {% if perms.aplicatie_exemplu.add_carte %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'adauga_carte' %}">Adaugă Carte</a>
+                </li>
+            {% endif %}
+            <a href="{% url 'logout' %}" style="color: #ff6b6b;">Logout</a>
+            <a href="{% url 'promotii' %}">Promotii</a>
+
+        
+            {% else %}
+            <a href="{% url 'login' %}">Autentificare</a>
+            <a href="{% url 'inregistrare' %}">Înregistrare cont nou</a>
+            {% endif %}
+            <a href="{% url 'contact' %}">Contact</a>
+            <a href="{% url 'cos_virtual' %}">Cos Virtual</a>
+            {% if user.is_authenticated %}
+                    {% if user|has_group:"Administratori_site" %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'log' %}">Log</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'info' %}">Info</a></li>
+                    {% endif %}
+            {% endif %}        </div>
+    </div>
+    </header>
+
+    <main>
+        {% if user.is_authenticated %}
+        <div id="banner-oferta" style="display:none; position:fixed; bottom:20px; right:20px; padding:20px; background:red; color:white; cursor:pointer; z-index:1000; border-radius:10px; animation: pulse 1s infinite;">
+            OFERTĂ REDUCERE 50%! Clic aici!
+        </div>
+
+        <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        </style>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Probabilitate de 30%
+                if (Math.random() < 0.3) {
+                    const banner = document.getElementById('banner-oferta');
+                    banner.style.display = 'block';
+                    
+                    banner.onclick = function() {
+                        // Redirecționăm către view-ul care alocă permisiunea
+                        window.location.href = "{% url 'aloca_permisiune_oferta' %}";
+                    };
+                }
+            });
+        </script>
+        {% endif %}
+        {% block continut %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <footer style="background-color: #222; color: #fff; padding: 40px 20px; margin-top: 50px; border-top: 3px solid #333;">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+        
+        <div style="flex: 1 1 300px;">
+            <h3 style="color: #f7b400; margin-bottom: 15px;">Contact</h3>
+            <p>📞 <strong>Telefon:</strong> +40758236290</p>
+            <p>📧 <strong>Email:</strong> contact@biblioteca-ta.ro</p>
+            <p>📍 <strong>Adresă:</strong> Str. Universitatii Nr. 10, București</p>
+        </div>
+
+        <div style="flex: 1 1 200px;">
+            <h3 style="color: #f7b400; margin-bottom: 15px;">Link-uri Rapide</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li><a href="{% url 'carti' %}" style="color: #bbb; text-decoration: none;">Toate Cărțile</a></li>
+                <li><a href="{% url 'contact' %}" style="color: #bbb; text-decoration: none;">Pagina de Contact</a></li>
+            </ul>
+        </div>
+
+        <div style="flex: 1 1 250px;">
+            <h3 style="color: #f7b400; margin-bottom: 15px;">Program Bibliotecă</h3>
+            <p>Luni - Vineri: 09:00 - 20:00</p>
+            <p>Sâmbătă: 10:00 - 16:00</p>
+            <p>Duminică: Închis</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #444; color: #777; font-size: 14px;">
+        &copy; 2024 Biblioteca Ta Online. Toate drepturile rezervate.
+    </div>
+</footer>
+        {% block footer %}
+        {% endblock %}
+    </footer>
+</body>
+</html>

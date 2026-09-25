@@ -1,0 +1,72 @@
+{% extends "baza.html" %}
+{% load static %}
+
+{% block titlu %}Log Accesari{% endblock %}
+
+{% block body_class %}log-page{% endblock %}
+
+{% block continut %}
+<h1>Log Accesari</h1>
+
+{% if err_ultimele %}
+<p style="color:red;">{{ err_ultimele }}</p>
+{% endif %}
+
+{% if total_nr %}
+<p>Total accesari (de la pornirea serverului): {{ total_nr }}</p>
+{% endif %}
+
+{% if detalii %}
+<h2>Detalii accesari (Data și Ora)</h2>
+<ul>
+    {% for a in lista %}
+        <li>ID: {{ a.id }}, Data: {{ a.data }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if campuri %}
+<h2>Tabel Accesari</h2>
+<table border="1" cellpadding="5" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 20px; background-color: white; color: black;">
+    <thead>
+        <tr style="background-color: #f2f2f2;">
+            {% for c in campuri %}
+            <th>{{ c|capfirst }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for accesare_dict in lista %}
+        <tr style="border-bottom: 1px solid #ddd;">
+
+            
+            {% if "id" in campuri %}
+                <td>{{ accesare_dict.id }}</td>
+            {% endif %}
+            
+            {% if "ip_client" in campuri %}
+                <td>{{ accesare_dict.ip_client }}</td>
+            {% endif %}
+            
+            {% if "url" in campuri %}
+                <td>{{ accesare_dict.url }}</td>
+            {% endif %}
+            
+            {% if "data" in campuri %}
+                <td>{{ accesare_dict.data }}</td>
+            {% endif %}
+            
+            {% if "pagina" in campuri %}
+                <td>{{ accesare_dict.pagina }}</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+<h2 style="margin-top: 30px;">Statistici Pagini</h2>
+<p><strong>Cea mai puțin accesată pagină:</strong> {{ cea_mai_putin|default:"N/A" }}</p>
+<p><strong>Cea mai mult accesată pagină:</strong> {{ cea_mai_mult|default:"N/A" }}</p>
+
+{% endblock %}

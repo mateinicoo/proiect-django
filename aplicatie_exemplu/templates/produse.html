@@ -1,0 +1,55 @@
+{% extends 'baza.html' %}
+{% block titlu %}Produse — Catalog{% endblock %}
+
+{% block continut %}
+<h2 class="pagina-titlu">Catalog de produse</h2>
+<p class="pagina-descriere">Aici sunt afișate produsele disponibile în magazin.</p>
+
+<div class="produse-grid">
+    {% for produs in produse %}
+    <div class="produs-card">
+        <div class="produs-thumb">
+            <img src="{{ produs.imagine.url }}" alt="{{ produs.nume }}">
+        </div>
+        <h3 class="produs-titlu">{{ produs.nume }}</h3>
+        <p class="produs-desc">{{ produs.descriere|truncatewords:20 }}</p>
+        <div class="produs-pret">{{ produs.pret }} RON</div>
+
+        <div class="produs-actiuni">
+            <a href="{% url 'produs_detalii' produs.id %}" class="btn">Detalii</a>
+            <a href="{% url 'adauga_cos' produs.id %}" class="btn btn-primary">Adaugă în coș</a>
+        </div>
+    </div>
+    {% empty %}
+        <div class="no-items">Nu există produse disponibile momentan.</div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block footer %}
+<p>&copy; {{ year }} Magazinul Meu</p>
+{% endblock %}
+
+<!-- Stiluri minime -->
+<style>
+    .pagina-titlu{font-size:28px;margin-bottom:10px}
+    .pagina-descriere{color:#555;margin-bottom:20px}
+
+    .produse-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+
+    .produs-card{background:#fff;padding:15px;border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,0.08);transition:.2s}
+    .produs-card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,0.12)}
+
+    .produs-thumb img{width:100%;border-radius:8px;height:180px;object-fit:cover}
+
+    .produs-titlu{font-size:18px;margin:10px 0}
+    .produs-desc{font-size:14px;color:#666;min-height:40px}
+
+    .produs-pret{font-weight:700;font-size:16px;margin:10px 0}
+
+    .produs-actiuni{display:flex;gap:10px}
+    .btn{padding:8px 12px;border-radius:8px;background:#eee;text-decoration:none;color:#111}
+    .btn-primary{background:#6b5bff;color:#fff}
+
+    .no-items{text-align:center;padding:40px;background:#fafafa;border-radius:10px}
+</style>

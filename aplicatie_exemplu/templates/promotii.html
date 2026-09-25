@@ -1,0 +1,129 @@
+{% extends 'baza.html' %}
+
+{% block continut %}
+<style>
+    .form-container input[type="text"], 
+    .form-container input[type="number"], 
+    .form-container textarea, 
+    .form-container select {
+        width: 30%;
+        padding: 10px;
+        margin-left: 10px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        display: block;
+    }
+
+    #id_categorii {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        padding: 0;
+        list-style: none;
+    }
+
+    #id_categorii li {
+        background: #ffffff;
+        border: 1px solid #007bff;
+        padding: 8px 15px;
+        border-radius: 20px;
+        transition: all 0.3s;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+
+    #id_categorii li:hover {
+        background: #e7f1ff;
+    }
+
+    #id_categorii input[type="checkbox"] {
+        margin-right: 8px;
+        transform: scale(1.2);
+    }
+
+    /* Stil pentru etichete (labels) */
+    label {
+        font-weight: bold;
+        color: #495057;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .section-title {
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+        color: #007bff;
+    }
+</style>
+
+<div class="container mt-5 form-container">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">Creare Promoție Nouă</h2>
+        </div>
+        <div class="card-body bg-light">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="row">
+                    <div class="col-md-6 border-end">
+                        <h4 class="section-title">Detalii Email</h4>
+                        <div class="form-group">
+                            {{ form.subiect.label_tag }}
+                            {{ form.subiect }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.mesaj_general.label_tag }}
+                            {{ form.mesaj_general }}
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h4 class="section-title">Detalii Promoție</h4>
+                        <div class="form-group">
+                            {{ form.nume_promotie.label_tag }}
+                            {{ form.nume_promotie }}
+                        </div>
+                        <div class="form-group">
+                            {{ form.data_expirare.label_tag }}
+                            <div class="d-flex gap-2">
+                                {{ form.data_expirare }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                {{ form.procent_reducere.label_tag }}
+                                {{ form.procent_reducere }}
+                            </div>
+                            <div class="col-6">
+                                {{ form.cod_voucher.label_tag }}
+                                {{ form.cod_voucher }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 p-3 border rounded bg-white">
+                    <h4 class="section-title">Selectați Categoriile Vizate</h4>
+                    <div class="alert alert-info py-2">
+                        <i class="fas fa-info-circle"></i> Mailurile vor fi trimise utilizatorilor cu minim <strong>2 vizualizări</strong> în categoriile de mai jos.
+                    </div>
+                    <div class="category-wrapper">
+                        {{ form.categorii }}
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 mt-4 shadow-sm">
+                        Trimite Promoția
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

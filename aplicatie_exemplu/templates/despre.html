@@ -1,0 +1,25 @@
+{% extends 'baza.html' %}
+{% load static %}
+
+{% block titlu %}Despre Noi{% endblock %}
+
+{% block continut %}
+<h1>Despre Noi</h1>
+<img src="{% static 'imagini/despre.webp' %}" alt="Despre noi" width="400">
+
+<section id="istoric">
+    <h2>Istoric</h2>
+    <p>Compania noastră a fost fondată în anul 2025 si este inca in dezvoltare</p>
+</section>
+
+<section id="echipa">
+    <h2>Echipa</h2>
+    <p>Deocamdata echipa noastra este formate dintr-o singura persoana... Dar ne vom extinde in curand.</p>
+
+</section>
+
+{% endblock %}
+
+{% block footer %}
+<p>IP utilizator: {{ ip_utilizator }}</p>
+{% endblock %}
