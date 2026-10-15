@@ -9,8 +9,8 @@ Site-ul pune la dispozitie carti si diverse obiecte vechi de arta la preturi acc
 * **Modul Customer Support & Reclamații:** Sistem dedicat de preluare a solicitărilor de la clienți, ce include validare riguroasă pe backend (Django Forms), salvare organizată a tichetelor și trasabilitate automată a datelor de trimitere (timestamping).
 ## 🛠️ Stack Tehnologic
 * **Backend:** Python, Django
-* **Bază de date:** SQLite (dezvoltare) / PostgreSQL (producție)
-* **Frontend:** Django Templates, Bootstrap 5 / Tailwind CSS, HTML5, CSS3
+* **Bază de date:**  PostgreSQL
+* **Frontend:** Django Templates, HTML5, CSS3
 ## ⚙️ Cum rulezi proiectul local
 1. **Clonează depozitul:**
    \`\`\`bash
